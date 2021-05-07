@@ -1,17 +1,12 @@
-const http=require("http");
-const fs = require("fs");
+const express = require("express");
+const app = express();
+const importdata= require("./data.json");
 
-const server= http.createServer((req,res)=> {
-  const data = fs.readFileSync("expressdemo/fakeapi.json","utf-8");
-  const objdata = JSON.parse(data);
-       
-    
-    if(req.url=="/"){
-         
-        res.writeHead(200,{"Content-type": "application/json"})
-        res.end(data);
-      }
-  
+let port = process.env.PORT || 3000;
+
+app.get("/",(req, res) =>{
+  res.send(importdata);
 });
-server.listen(8080);
- 
+
+
+app.listen(3000);
